@@ -14,6 +14,11 @@ function App() {
   if (!data) return <div>Loading...</div>;
 
   const { title, header, main_body, footer } = data;
+  function stripHTML(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  }
+  
 
   return (
     <div>
@@ -55,7 +60,7 @@ function App() {
                   />
                 )}
                 <Card.Body>
-                  <Card.Text>{block.para}</Card.Text>
+                  <Card.Text>{stripHTML(block.para)}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
